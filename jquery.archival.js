@@ -19,7 +19,7 @@
 		var datetime = published ? published.replace(/\D/g, '') : '*';
 		var prefix = 'https://web.archive.org/web/' + datetime + '/';
 
-		$('a[href]', this).each(function() {
+		$('[itemprop=articleBody] a[href]', this).each(function() {
 			var archiveLink = $('<a/>', { href: prefix + this.href }).css(css);
 
 			$(this)
