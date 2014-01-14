@@ -10,6 +10,7 @@
 		backgroundPosition: 'top left',
 		backgroundImage: 'url(https://archive.org/images/glogo.jpg)',
 		backgroundSize: 'contain',
+		opacity: 0.75,
 		filter: 'invert(100%)',
 		'-webkit-filter': 'invert(100%)' /* temporary */
 	};
