@@ -1,7 +1,7 @@
 (function($) {
 	var css = {
 		display: 'inline-block',
-		position: 'absolute',
+		position: 'fixed',
 		width: '16px',
 		height: '18px',
 		backgroundRepeat: 'no-repeat',
@@ -11,6 +11,7 @@
 	};
 
 	var link = $('<a/>').css(css);
+	var mouseEnterTimer, mouseLeaveTimer;
 
 	$('article').each(function() {
 		var article = $(this);
@@ -20,29 +21,35 @@
 		var prefix = 'https://web.archive.org/web/' + datetime + '/';
 
 		article.find('[itemprop=articleBody] a[href]').each(function() {
-			var url = prefix + this.href;
-			var node = $(this);
-			var hovering;
-
-			node
+			$(this)
 				.on('mouseenter', function() {
+					var url = prefix + this.href;
+					var node = $(this);
 					var offset = node.offset();
-					offset.top -= 15;
-					offset.left += 15;
 
-					hovering = window.setTimeout(function() {
-						link.attr('href', url).offset(offset).appendTo(node).show();
-					}, 250);
-				}).on('mouseleave', function() {
-					if (hovering) {
-						window.clearTimeout(hovering);
+					if (mouseLeaveTimer) {
+						window.clearTimeout(mouseLeaveTimer);
 					}
 
-					window.setTimeout(function() {
+					mouseEnterTimer = window.setTimeout(function() {
+						link
+							.attr('href', url)
+							.css({
+								top: (offset.top - 15) + 'px',
+								left: (offset.left + 15) + 'px'
+							})
+							.appendTo(node)
+							.show();
+					}, 250);
+				}).on('mouseleave', function() {
+					if (mouseEnterTimer) {
+						window.clearTimeout(mouseEnterTimer);
+					}
+
+					mouseLeaveTimer = window.setTimeout(function() {
 						link.hide();
 					}, 500);
 				});
 		});
 	});
-
 })(jQuery)
