@@ -1,7 +1,7 @@
 (function($) {
 	var css = {
 		display: 'inline-block',
-		position: 'fixed',
+		position: 'absolute',
 		width: '16px',
 		height: '18px',
 		backgroundRepeat: 'no-repeat',
@@ -25,7 +25,7 @@
 				.on('mouseenter', function() {
 					var url = prefix + this.href;
 					var node = $(this);
-					var offset = node.offset();
+					var position = node.position();
 
 					if (mouseLeaveTimer) {
 						window.clearTimeout(mouseLeaveTimer);
@@ -35,8 +35,8 @@
 						link
 							.attr('href', url)
 							.css({
-								top: (offset.top - 15) + 'px',
-								left: offset.left + 'px'
+								top: (position.top - 15) + 'px',
+								left: position.left + 'px'
 							})
 							.appendTo(node)
 							.show();
