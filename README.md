@@ -6,4 +6,4 @@ It will add an extra icon to each link, visible on hover, linking to the Wayback
 
 Note that the archive may be from a later date than the date the article was published, if that date is closer than an earlier date.
 
-[Demonstration](http://git.macropus.org/jquery-archival/)
+[Demonstration](http://git.macropus.org/jquery-archival/demo/)
