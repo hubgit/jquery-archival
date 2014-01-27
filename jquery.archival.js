@@ -36,7 +36,7 @@
 							.attr('href', url)
 							.css({
 								top: (offset.top - 15) + 'px',
-								left: (offset.left + 15) + 'px'
+								left: offset.left + 'px'
 							})
 							.appendTo(node)
 							.show();
