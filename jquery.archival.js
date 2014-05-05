@@ -31,13 +31,10 @@
 				}
 
 				mouseEnterTimer = window.setTimeout(function() {
-					link.attr('href', url)
-						.css({
-							top: (position.top - 15) + 'px',
-							left: position.left + 'px'
-						})
-						.appendTo(node)
-						.show();
+					link.attr('href', url).css({
+						top: (position.top - 15) + 'px',
+						left: position.left + 'px'
+					}).appendTo(node).show();
 				}, 250);
 			}).on('mouseleave', function() {
 				if (mouseEnterTimer) {
