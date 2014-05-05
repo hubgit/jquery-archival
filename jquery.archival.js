@@ -21,35 +21,33 @@
 		var prefix = 'https://web.archive.org/web/' + datetime + '/';
 
 		article.find('[itemprop=articleBody] a[href]').each(function() {
-			$(this)
-				.on('mouseenter', function() {
-					var url = prefix + this.href;
-					var node = $(this);
-					var position = node.position();
+			$(this).on('mouseenter', function() {
+				var url = prefix + this.href;
+				var node = $(this);
+				var position = node.position();
 
-					if (mouseLeaveTimer) {
-						window.clearTimeout(mouseLeaveTimer);
-					}
+				if (mouseLeaveTimer) {
+					window.clearTimeout(mouseLeaveTimer);
+				}
 
-					mouseEnterTimer = window.setTimeout(function() {
-						link
-							.attr('href', url)
-							.css({
-								top: (position.top - 15) + 'px',
-								left: position.left + 'px'
-							})
-							.appendTo(node)
-							.show();
-					}, 250);
-				}).on('mouseleave', function() {
-					if (mouseEnterTimer) {
-						window.clearTimeout(mouseEnterTimer);
-					}
+				mouseEnterTimer = window.setTimeout(function() {
+					link.attr('href', url)
+						.css({
+							top: (position.top - 15) + 'px',
+							left: position.left + 'px'
+						})
+						.appendTo(node)
+						.show();
+				}, 250);
+			}).on('mouseleave', function() {
+				if (mouseEnterTimer) {
+					window.clearTimeout(mouseEnterTimer);
+				}
 
-					mouseLeaveTimer = window.setTimeout(function() {
-						link.hide();
-					}, 500);
-				});
+				mouseLeaveTimer = window.setTimeout(function() {
+					link.hide();
+				}, 500);
+			});
 		});
 	});
 })(jQuery)
