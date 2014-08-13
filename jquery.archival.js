@@ -17,20 +17,21 @@
 		var article = $(this);
 
 		var published = article.find('time[datetime][itemprop=datePublished]').attr('datetime');
-		var datetime = published ? published.replace(/\D/g, '') : '*';
-		var prefix = 'https://web.archive.org/web/' + datetime + '/';
 
 		article.find('[itemprop=articleBody] a[href]').each(function() {
-			$(this).on('mouseenter', function() {
-				var url = prefix + this.href;
-				var node = $(this);
-				var position = node.position();
+			var node = $(this);
 
+			node.on('mouseenter', function() {
 				if (mouseLeaveTimer) {
 					window.clearTimeout(mouseLeaveTimer);
 				}
 
 				mouseEnterTimer = window.setTimeout(function() {
+					var datetime = node.closest('ins[datetime]').attr('datetime') || published || '*';
+					var prefix = 'https://web.archive.org/web/' + datetime.replace(/\D/g, '') + '/';
+					var url = prefix + node.get(0).href;
+					var position = node.position();
+				
 					link.attr('href', url).css({
 						top: (position.top - 15) + 'px',
 						left: position.left + 'px'
